@@ -29,7 +29,8 @@ def get_play_list(start_url, cid, quality):
     url_api = 'https://interface.bilibili.com/v2/playurl?%s&sign=%s' % (params, chksum)
     headers = {
         'Referer': start_url,  # 注意加上referer
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+	    'Cookie': 'SESSDATA=dbb41fa8%2C1664787561%2C5bf00%2A41'
     }
     # print(url_api)
     html = requests.get(url_api, headers=headers).json()
@@ -126,6 +127,7 @@ def down_video(video_list, title, start_url, page):
             ('Referer', start_url),  # 注意修改referer,必须要加的!
             ('Origin', 'https://www.bilibili.com'),
             ('Connection', 'keep-alive'),
+            ('Cookie', 'SESSDATA=dbb41fa8%2C1664787561%2C5bf00%2A41'),
         ]
         urllib.request.install_opener(opener)
         # 创建文件夹存放下载的视频
@@ -187,7 +189,8 @@ if __name__ == '__main__':
     quality = input('请输入您要下载视频的清晰度(1080p:80;720p:64;480p:32;360p:16)(填写80或64或32或16):')
     # 获取视频的cid,title
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+        'Cookie': 'SESSDATA=dbb41fa8%2C1664787561%2C5bf00%2A41'
     }
     html = requests.get(start_url, headers=headers).json()
     data = html['data']
